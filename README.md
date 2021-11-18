@@ -1,20 +1,3 @@
-# eCommerce Website
-
-## Overview
-
-## Installed packages
-### Download Node.js
-### `npm install -g npm`
-### `npm install create-react-app -g`
-### `npm install jquery --save`
-### `npm install popper.js --save`
-### `npm install bootstrap --save`
-### `npm install json-server -g`
-### `npm install react-router-dom --save`
-
-## Setup the database
-### `json-server react-db.json --watch --port=5000`
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -85,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Installed packages
+### Download Node.js
+### `npm install -g npm`
+### `npm install create-react-app -g`
+### `npm install jquery --save`
+### `npm install popper.js --save`
+### `npm install bootstrap --save`
+### `npm install json-server -g`
+### `npm install react-router-dom --save`
+
+## Setup the database
+### `json-server react-db.json --watch --port=5000`
