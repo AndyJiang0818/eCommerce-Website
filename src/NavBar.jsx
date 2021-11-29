@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import history from "./history";
 
 export default class NavBar extends Component {
   render() {
@@ -7,7 +8,7 @@ export default class NavBar extends Component {
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-style">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/#">
+            <a className="navbar-brand" href="#">
               eCommerce
             </a>
             <button
@@ -26,29 +27,89 @@ export default class NavBar extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/">
-                    Login
-                  </Link>
-                </li>
+                {!this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/"
+                      activeClassName="active"
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
 
-                <li className="nav-item">
-                  <Link className="nav-link" to="/dashboard">
-                    Dashboard
-                  </Link>
-                </li>
+                {!this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/register"
+                      activeClassName="active"
+                    >
+                      Register
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
 
-                <li className="nav-item">
-                  <Link className="nav-link" to="/customers">
-                    Customers
-                  </Link>
-                </li>
+                {this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/dashboard"
+                      activeClassName="active"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
 
-                <li className="nav-item">
-                  <Link className="nav-link" to="/cart">
-                    Shopping Cart
-                  </Link>
-                </li>
+                {this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/customers"
+                      activeClassName="active"
+                    >
+                      Customers
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                {this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/cart"
+                      activeClassName="active"
+                    >
+                      Shopping Cart
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                {this.props.isLoggedIn ? (
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      href="#"
+                      onClick={this.onLogoutClick}
+                    >
+                      Logout
+                    </a>
+                  </li>
+                ) : (
+                  ""
+                )}
               </ul>
             </div>
           </div>
@@ -56,4 +117,14 @@ export default class NavBar extends Component {
       </React.Fragment>
     );
   }
+
+  onLogoutClick = (event) => {
+    event.preventDefault();
+
+    this.props.updateIsLoggedInStatus(false);
+
+    document.location.hash = "/";
+  };
 }
+
+// export default NavBar;

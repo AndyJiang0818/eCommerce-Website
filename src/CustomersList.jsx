@@ -1,33 +1,16 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class CustomersList extends Component {
-  state = {
-    pageTitle: "Customers",
-    customersCount: 5,
-    customers: [
-      {
-        id: 1,
-        name: "Tom",
-        phone: "123-456-789",
-        address: { city: "NYC" },
-        photo: "https://picsum.photos/id/1/100",
-      },
-      {
-        id: 2,
-        name: "Jim",
-        phone: "123-456-788",
-        address: { city: "Chicago" },
-        photo: "https://picsum.photos/id/2/100",
-      },
-      {
-        id: 3,
-        name: "Kayla",
-        phone: null,
-        address: { city: "LA" },
-        photo: "https://picsum.photos/id/3/100",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pageTitle: "Customers",
+      customersCount: 5,
+      customers: [],
+    };
+  }
 
   render() {
     return (
@@ -39,9 +22,9 @@ export default class CustomersList extends Component {
             {this.state.customersCount}
           </span>
 
-          <button className="btn btn-info" onClick={this.onRefreshClick}>
-            Refresh
-          </button>
+          <Link to="/new-customer" className="btn btn-primary">
+            New Customer
+          </Link>
         </h4>
 
         <table className="table table-striped">
@@ -52,6 +35,7 @@ export default class CustomersList extends Component {
               <th>Phone Numbers</th>
               <th>City</th>
               <th>Photo</th>
+              <th>Options</th>
             </tr>
           </thead>
 
@@ -61,8 +45,20 @@ export default class CustomersList extends Component {
     );
   }
 
-  onRefreshClick = () => {
-    this.setState({ customersCount: 7 });
+  componentDidMount = async () => {
+    document.title = "Customer - eCommerce";
+
+    let response = await fetch("http://localhost:5000/customers", {
+      method: "GET",
+    });
+
+    if (response.ok) {
+      let body = await response.json();
+
+      this.setState({ customers: body, customersCount: body.length });
+    } else {
+      console.log("Error" + response.status);
+    }
   };
 
   getPhoneToRender = (phone) => {
@@ -81,6 +77,7 @@ export default class CustomersList extends Component {
           <td>{customer.name}</td>
           <td>{this.getPhoneToRender(customer.phone)}</td>
           <td>{customer.address.city}</td>
+
           <td>
             <img src={customer.photo} alt="Customer" />
             <div>
@@ -94,6 +91,23 @@ export default class CustomersList extends Component {
               </button>
             </div>
           </td>
+
+          <td>
+            <Link
+              to={`/edit-customer/${customer.id}`}
+              className="btn btn-info m-2"
+            >
+              Edit
+            </Link>
+            <button
+              className="btn btn-danger m-2"
+              onClick={() => {
+                this.onDeleteClick(customer.id);
+              }}
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       );
     });
@@ -104,5 +118,25 @@ export default class CustomersList extends Component {
     customerArray[index].photo = "https://picsum.photos/id/4/100";
 
     this.setState({ customers: customerArray });
+  };
+
+  onDeleteClick = async (id) => {
+    if (window.confirm("Are you sure to delete?")) {
+      let response = await fetch(`http://localhost:5000/customers/${id}`, {
+        method: "DELETE",
+      });
+
+      let body = await response.json();
+
+      if (response.ok) {
+        let allCustomers = [...this.state.customers];
+
+        allCustomers = allCustomers.filter((customer) => {
+          return customer.id != id;
+        });
+
+        this.setState({ customers: allCustomers });
+      }
+    }
   };
 }

@@ -8,4 +8,8 @@ export default class NoMatchPage extends Component {
       </div>
     );
   }
+
+  componentDidMount() {
+    document.title = "404 - eCommerce";
+  }
 }

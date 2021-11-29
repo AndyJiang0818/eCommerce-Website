@@ -13,7 +13,7 @@ export default class ShoppingCart extends Component {
   render() {
     return (
       <div>
-        <h4>Shopping Cart</h4>
+        <h4 className="m-1 p-2">Shopping Cart</h4>
 
         <div className="row">
           {this.state.products.map((product) => {
@@ -35,6 +35,8 @@ export default class ShoppingCart extends Component {
   }
 
   componentDidMount = async () => {
+    document.title = "Cart - eCommerce";
+
     let response = await fetch("http://localhost:5000/products", {
       method: "GET",
     });

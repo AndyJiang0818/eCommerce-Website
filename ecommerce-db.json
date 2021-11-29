@@ -1,0 +1,111 @@
+{
+    "brand": [
+      {
+        "id": 1,
+        "brandName": "Apple"
+      },
+      {
+        "id": 2,
+        "productName": "Apple"
+      },
+      {
+        "id": 3,
+        "productName": "Samsung"
+      }
+    ],
+    "categories": [
+      {
+        "id": 1,
+        "categoryName": "Mobile"
+      },
+      {
+        "id": 2,
+        "categoryName": "Mobile"
+      },
+      {
+        "id": 3,
+        "categoryName": "Mobile"
+      }
+    ],
+    "products": [
+        {
+          "id": 1,
+          "productName": "iPad Air 4",
+          "price": 1500,
+          "brandID": 1,
+          "categoryID": 1,
+          "rating": 5
+        },
+        {
+          "id": 2,
+          "productName": "iPhone 13",
+          "price": 1200,
+          "brandID": 2,
+          "categoryID": 2,
+          "rating": 5
+        },
+        {
+          "id": 3,
+          "productName": "Samsung Galaxy S20",
+          "price": 1000,
+          "brandID": 3,
+          "categoryID": 3,
+          "rating": 5
+        }
+      ],
+      "users": [
+        {
+          "id": 1,
+          "email": "abc@gmail.com",
+          "password": "12345678",
+          "fullName": "Tom Davis",
+          "dob": "1999-01-01",
+          "gender": "male",
+          "country": "USA",
+          "receiveNews": true
+        },
+        {
+          "id": 2,
+          "email": "bcd@gmail.com",
+          "password": "123456789",
+          "fullName": "Jim Hopper",
+          "dob": "2000-01-01",
+          "gender": "male",
+          "country": "USA",
+          "receiveNews": true
+        },
+        {
+          "id": 3,
+          "email": "abc@abc",
+          "password": "abc",
+          "fullName": "Tim Lee",
+          "dob": "2001-01-01",
+          "gender": "male",
+          "country": "USA",
+          "receiveNews": true
+        }
+      ],
+      "orders": [
+        {
+          "id": 1,
+          "userID": 1,
+          "productID": 1,
+          "quantity": 1,
+          "isPaymentCompleted": true
+        },
+        {
+          "id": 2,
+          "userID": 2,
+          "productID": 2,
+          "quantity": 1,
+          "isPaymentCompleted": true
+        },
+        {
+          "id": 3,
+          "userID": 3,
+          "productID": 3,
+          "quantity": 1,
+          "isPaymentCompleted": true
+        }
+      ]
+  }

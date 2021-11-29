@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Product extends Component {
   constructor(props) {
@@ -59,7 +60,12 @@ export default class Product extends Component {
               </div>
             </div>
 
-            <div className="float-end">{this.props.children}</div>
+            <div className="float-end">
+              <Link to={`product/${this.state.product.id}`} className="m-2">
+                Details
+              </Link>
+              {this.props.children}
+            </div>
           </div>
         </div>
       </div>
