@@ -1,15 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class NoMatchPage extends Component {
-  render() {
-    return (
-      <div>
-        <h4 className="m-1 p-2">Page not found</h4>
-      </div>
-    );
-  }
-
-  componentDidMount() {
-    document.title = "404 - eCommerce";
-  }
+function NoMatchPage(props) {
+  return <h1 className="text-danger">Page Not Found</h1>;
 }
+
+export default NoMatchPage;

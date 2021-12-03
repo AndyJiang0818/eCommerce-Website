@@ -1,80 +1,49 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
-export default class Product extends Component {
-  constructor(props) {
-    super(props);
+function Product(props) {
+  let [products] = useState(props.products);
 
-    this.state = {
-      product: this.props.product,
-    };
-  }
+  return (
+    <div className="col-lg-6">
+      <div className="card m-1">
+        <div className="card-body">
+          <h5>
+            <i className="fa fa-arrow-right"></i> {props.products.productName}
+          </h5>
 
-  render() {
-    return (
-      <div className="col-lg-6">
-        <div className="card m-2">
-          <div className="card-body">
-            <div className="text-muted">
-              Product #{this.state.product.id}
-              <span
-                className="pull-right hand-icon"
-                onClick={() => {
-                  this.props.onDelete(this.state.product);
-                }}
-              >
-                <i className="fa fa-times"></i>
-              </span>
-            </div>
-
-            <h5 className="pt-2 border-top">
-              {this.state.product.productName}
-            </h5>
-
-            <div>${this.state.product.price}</div>
+          <div>${products.price.toFixed(2)}</div>
+          <div className="mt-2 text-muted">
+            #{products.brands.brandName} #{products.categories.categoryName}
           </div>
 
-          <div className="card-footer">
-            <div className="float-start">
-              <span className="badge text-dark">
-                {this.props.product.quantity}
-              </span>
+          <div>
+            {[...Array(products.rating).keys()].map((n) => {
+              return <i className="fa fa-star text-warning" key={n}></i>;
+            })}
 
-              <div className="btn-group">
-                <button
-                  className="btn btn-outline-success"
-                  onClick={() => {
-                    this.props.onIncrement(this.state.product, 10);
-                  }}
-                >
-                  +
-                </button>
-                <button
-                  className="btn btn-outline-success"
-                  onClick={() => {
-                    this.props.onDecrement(this.state.product, 0);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            </div>
+            {[...Array(5 - products.rating).keys()].map((n) => {
+              return <i className="fa fa-star-o text-warning" key={n}></i>;
+            })}
+          </div>
 
-            <div className="float-end">
-              <Link to={`product/${this.state.product.id}`} className="m-2">
-                Details
-              </Link>
-              {this.props.children}
-            </div>
+          <div className="float-end">
+            {products.isOrdered ? (
+              <span className="text-primary">Added to Cart!</span>
+            ) : (
+              <button
+                className="btn btn-sm btn-primary"
+                onClick={() => {
+                  props.onAddClick(products);
+                }}
+              >
+                <i className="fa fa-shopping-cart"></i> Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>
-    );
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
+    </div>
+  );
 }
+
+export default Product;

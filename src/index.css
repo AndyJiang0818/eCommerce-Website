@@ -1,25 +1,15 @@
-.highlight {
-  background-color: aqua;
-}
-
 .navbar-style {
-  background-color: green !important;
-}
-
-.green-highlight {
-  color: #008000;
-  font-size: 40px;
-}
-
-.red-highlight {
-  color: #ff0000;
-  font-size: 25px;
-}
-
-.hand-icon {
-  cursor: pointer;
+  background-color: #1285e4 !important;
 }
 
 .nav-link.active {
+  color: #ffffff;
   border-bottom: 2px solid #ffffff;
+}
+
+.header {
+  background-color: #e6e6e6;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }

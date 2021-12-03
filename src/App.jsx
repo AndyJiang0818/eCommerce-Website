@@ -1,64 +1,65 @@
-import React, { Component } from "react";
-import NavBar from "./NavBar";
+import React, { useReducer } from "react";
 import Login from "./Login";
-import CustomersList from "./CustomersList";
-import ShoppingCart from "./ShoppingCart";
-import Dashboard from "./Dashboard";
-import { Route, Routes } from "react-router";
-import { BrowserRouter as Router } from "react-router-dom";
+import Register from "./Register";
 import NoMatchPage from "./NoMatchPage";
-import SideBar from "./SideBar";
-import ProductByID from "./ProductByID";
+import NavBar from "./NavBar";
+import Dashboard from "./Dashboard";
 import { HashRouter } from "react-router-dom";
-import InsertCustomer from "./InsertCustomer";
-import UpdateCustomer from "./UpdateCustomer";
-import Registration from "./Registration";
+import { Route, Switch, Routes } from "react-router";
+import { UserContext } from "./UserContext";
+import Store from "./Store";
+import ProductsList from "./ProductsList";
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoggedIn: false };
+let initialUser = {
+  isLoggedIn: false,
+  currentUserID: null,
+  currentUserName: null,
+  currentUserRole: null,
+};
+
+let reducer = (state, action) => {
+  switch (action.type) {
+    case "login":
+      return {
+        isLoggedIn: true,
+        currentUserID: action.payload.currentUserID,
+        currentUserName: action.payload.currentUserName,
+        currentUserRole: action.payload.currentUserRole,
+      };
+
+    case "logout":
+      return {
+        isLoggedIn: false,
+        currentUserID: null,
+        currentUserName: null,
+        currentUserRole: null,
+      };
+
+    default:
+      return state;
   }
+};
 
-  render() {
-    return (
+function App() {
+  let [user, dispatch] = useReducer(reducer, initialUser);
+
+  return (
+    <UserContext.Provider value={{ user, dispatch }}>
       <HashRouter>
-        <NavBar
-          isLoggedIn={this.state.isLoggedIn}
-          updateIsLoggedInStatus={this.updateIsLoggedInStatus}
-        />
+        <NavBar />
         <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-3">
-              {this.state.isLoggedIn ? <SideBar /> : ""}
-            </div>
-            <div className="col-lg-9">
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Login
-                      updateIsLoggedInStatus={this.updateIsLoggedInStatus}
-                    />
-                  }
-                />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/customers" element={<CustomersList />} />
-                <Route path="/cart" element={<ShoppingCart />} />
-                <Route path="/product/:id" element={<ProductByID />} />
-                <Route path="/new-customer" element={<InsertCustomer />} />
-                <Route path="/edit-customer/:id" element={<UpdateCustomer />} />
-                <Route path="/register" element={<Registration />} />
-                <Route path="*" element={<NoMatchPage />} />
-              </Routes>
-            </div>
-          </div>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/products" element={<ProductsList />} />
+            <Route path="*" element={<NoMatchPage />} />
+          </Routes>
         </div>
       </HashRouter>
-    );
-  }
-
-  updateIsLoggedInStatus = (status) => {
-    this.setState({ isLoggedIn: status });
-  };
+    </UserContext.Provider>
+  );
 }
+
+export default App;
