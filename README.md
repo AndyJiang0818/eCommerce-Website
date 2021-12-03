@@ -15,6 +15,14 @@
 - Admins are able to the "Products" page, which shows all the items. 
 - Admins are able to filter the items by name, brand, category, price, quantity, and rating of the item list. 
 
+## Tools/Techniques
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- React.js
+- Hooks
+
 ## Installed packages
 ### Download Node.js
 ### `npm install -g npm`
@@ -30,11 +38,3 @@
 
 ## Run
 ### `npm start`
-
-## Tools/Techniques
-- HTML
-- CSS
-- JavaScript
-- Node.js
-- React.js
-- Hooks
