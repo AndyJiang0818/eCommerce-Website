@@ -30,7 +30,6 @@
 - JavaScript
 - Node.js
 - React.js
-- Hooks
 
 ## Installed packages
 ### Download Node.js
