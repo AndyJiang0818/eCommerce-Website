@@ -1,4 +1,4 @@
-# eCommerce-Website
+# eCommerce-Website-React
 
 ## Installed packages
 ### Download Node.js
@@ -11,4 +11,4 @@
 ### `npm install react-router-dom --save`
 
 ## Setup the database
-### `json-server react-db.json --watch --port=5000`
+### `json-server ecommerce-db.json --watch --port=5000`
