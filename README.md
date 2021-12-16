@@ -1,4 +1,4 @@
-# eCommerce-Website-React
+# eCommerce Website using React
 
 ## Overview
 ### Idea
